@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kedacom.kedabootdo.dao.mybatis.ProjectInfoMapper">
+   
+   <resultMap id="projectInfoMap" type="com.kedacom.kedabootdo.model.mybatis.ProjectInfo" >
+		<id column="id" property="id"/>
+		<result column="project_name" property="projectName"/>
+		<result column="project_code" property="projectCode"/>
+		<result column="task_name" property="taskName"/>
+		<result column="task_code" property="taskCode"/>
+		<result column="task_planned_start_date" property="startDate"/>
+		<result column="task_planned_end_date" property="endDate"/>
+	</resultMap>
+   
+   <select id="getNextSeq" resultType="Integer">
+       select seq_plm_project_info.nextval from dual
+   </select>
+   
+   <select id="getMyPendingTasks" resultMap="projectInfoMap">
+		select id,project_name,project_code,task_name,task_code,task_planned_start_date,
+		task_planned_end_date from plm_project_info
+        where task_type=1 and task_status='进行中'
+		<if test="@Ognl@isNotEmpty(map.createBy)"> and create_by = #{map.createBy}</if>
+		order by id 
+	</select>
+</mapper>

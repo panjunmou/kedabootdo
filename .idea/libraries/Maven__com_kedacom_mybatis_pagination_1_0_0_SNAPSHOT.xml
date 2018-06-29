@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.kedacom:mybatis-pagination:1.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/mybatis-pagination/1.0.0-SNAPSHOT/mybatis-pagination-1.0.0-20150722.075209-12.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/mybatis-pagination/1.0.0-SNAPSHOT/mybatis-pagination-1.0.0-20150722.075209-12-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/mybatis-pagination/1.0.0-SNAPSHOT/mybatis-pagination-1.0.0-20150722.075209-12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

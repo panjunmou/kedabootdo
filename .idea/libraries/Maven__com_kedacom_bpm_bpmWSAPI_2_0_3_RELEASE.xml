@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.kedacom.bpm:bpmWSAPI:2.0.3-RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/bpm/bpmWSAPI/2.0.3-RELEASE/bpmWSAPI-2.0.3-RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/bpm/bpmWSAPI/2.0.3-RELEASE/bpmWSAPI-2.0.3-RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/bpm/bpmWSAPI/2.0.3-RELEASE/bpmWSAPI-2.0.3-RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

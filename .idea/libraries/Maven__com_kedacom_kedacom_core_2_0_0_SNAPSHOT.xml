@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.kedacom:kedacom-core:2.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/kedacom-core/2.0.0-SNAPSHOT/kedacom-core-2.0.0-20180525.045023-17.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/kedacom-core/2.0.0-SNAPSHOT/kedacom-core-2.0.0-20180525.045023-17-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/kedacom-core/2.0.0-SNAPSHOT/kedacom-core-2.0.0-20180525.045023-17-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -27,12 +27,12 @@ import java.util.Map;
 
 /**
  * 主界面登录界面配置
+ *
  * @author chenghogntao
  * created on 2016年5月10日
- *
  */
 @Controller
-@RequestMapping({ "/platform/console" })
+@RequestMapping({"/platform/console"})
 public class MainController {
     private Logger logger = LoggerFactory.getLogger(MainController.class);
 
@@ -47,26 +47,31 @@ public class MainController {
 
     /**
      * 主界面
+     *
      * @param request
      * @param response
      * @return
      * @throws Exception
      */
-    @RequestMapping({ "main.do" })
+    @RequestMapping({"main.do"})
     public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
         logger.debug("登录进入系统后main[UserAccount]:" + ContextUtil.getCurrentUser().getAccount());
         this.subSystemService.setCurrentSystem(Long.valueOf(2), request, response);
 
         return new ModelAndView("console/main").addObject("currentUser", ContextUtil.getCurrentUser());
     }
-    
+
+    @RequestMapping({"hello.do"})
+    public ModelAndView hello(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return new ModelAndView("console/hello");
+    }
+
     /**
-     * 
      * @param request
      * @param response
      * @return
      */
-    @RequestMapping({ "getResourceNode" })
+    @RequestMapping({"getResourceNode"})
     @ResponseBody
     public Resources getResourceNode(HttpServletRequest request, HttpServletResponse response) {
         Resources resource = null;
@@ -78,27 +83,29 @@ public class MainController {
         }
         return resource;
     }
-    
+
     /**
      * 切换系统
+     *
      * @param request
      * @param response
      * @throws IOException
      */
-    @RequestMapping({ "saveCurrSys" })
+    @RequestMapping({"saveCurrSys"})
     public void saveCurrSys(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long systemId = Long.valueOf(RequestUtil.getLong(request, "systemId"));
         this.subSystemService.setCurrentSystem(systemId, request, response);
         response.sendRedirect(request.getContextPath() + "/platform/console/main.ht");
     }
-    
+
     /**
      * 切换当前组织
+     *
      * @param request
      * @param response
      * @throws IOException
      */
-    @RequestMapping({ "switchCurrentOrg" })
+    @RequestMapping({"switchCurrentOrg"})
     public void switchCurrentOrg(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long orgId = Long.valueOf(RequestUtil.getLong(request, "orgId"));
         ContextUtil.setCurrentOrg(orgId);
@@ -107,12 +114,13 @@ public class MainController {
 
     /**
      * 显示左面菜单
+     *
      * @param request
      * @param response
      * @return
      * @throws Exception
      */
-    @RequestMapping({ "getSysRolResTreeData.do" })
+    @RequestMapping({"getSysRolResTreeData.do"})
     @ResponseBody
     public Map<String, List<TreeVo>> getSysRolResTreeData(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -141,6 +149,7 @@ public class MainController {
 
     /**
      * 获取该菜单下的所有子菜单
+     *
      * @param top
      * @param resourceList
      * @return

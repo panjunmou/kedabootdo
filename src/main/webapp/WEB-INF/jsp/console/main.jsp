@@ -1,106 +1,159 @@
-﻿<%@page import="org.springframework.security.authentication.AuthenticationServiceException"%>
-<%@page import="org.springframework.security.authentication.AccountExpiredException"%>
-<%@page import="org.springframework.security.authentication.DisabledException"%>
-<%@page import="org.springframework.security.authentication.LockedException"%>
-<%@page import="org.springframework.security.authentication.BadCredentialsException"%>
-<%@page import="java.util.Enumeration"%>
-<%@page import="com.kedacom.core.utils.ApplicationUtil"%>
-<%@page import="java.util.Properties"%>
-<%@page pageEncoding="UTF-8"%>
-<%@page import="org.springframework.security.web.WebAttributes"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+﻿<%@page pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="科达科技" />
-<meta name="description" content="" />
-<title>日报系统首页</title>
-<%@include file="/commons/include/get.jsp" %>
-<script type="text/javascript">
-    if(top!=this){//当这个窗口出现在iframe里，表示其目前已经timeout，需要把外面的框架窗口也重定向登录页面
-        top.location='<%=request.getContextPath()%>/platform/console/main.do';
-    }
-	//布局 
-    $(document).ready(function () {
-		$("#layout1").ligerLayout({
-			leftWidth : 200,
-			allowTopResize : false,
-			topHeight : 55
-		});
-	    $("#navigation").kdAccordionTree({url:"${ctx}/platform/console/getSysRolResTreeData.do?id=${currentUser.userId}"});
-
-	});
-</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="科达科技"/>
+    <meta name="description" content=""/>
+    <title>总代管理系统首页</title>
+    <%@include file="/commons/include/get.jsp" %>
+    <link href="${ctx}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${ctx}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="${ctx}/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="${ctx}/css/animate.css" rel="stylesheet">
+    <link href="${ctx}/css/style.css?v=4.1.0" rel="stylesheet">
 </head>
 
-<body class="kd-property">
-	<div id="layout1">
-		<!--头部-->
-		<div position="top">
-			<div class="kd-property-header rel ovh">
-				<div class="keda-logo abs">
-					<a href="#" target="_blank" title="科达科技日报管理系统"> <img
-						width="176" height="14" src="${ctx}/images/kd-property-logo.png"
-						alt="科达科技日报管理系统" /></a>
-				</div>
-                <!--提示：系统将于今天15:00进行维护升级，预计17:00恢复运营，届时给您带来不便还请谅解!-->
-				<div class="tip abs"><marquee width="400" scrollamount=3></marquee></div>
-				<div class="user-setting abs">
-					<ul class="setting-list">
-						<li><p class="user-msg" >${currentUser.fullname}</p></li>
-                        <sec:authorize ifAllGranted="ROLE_SUPER">
-                            <li>
-                                <a class="settings" href="#" onclick="switchUser()">切换用户</a>
-                                <div id="switchUserDiv" style="display: none;">
-                                    <div>
-                                        请输入要切换的账户：<input type="text" id="switchUserAccount" style="width: 200px" class="form-control"/>
-                                    </div>
-                                </div>
-                            </li>
-                            <script type="text/javascript">
-                                function switchUser() {
-                                    $.ligerDialog.open({
-                                        title: '切换用户：',
-                                        target: $("#switchUserDiv"),
-                                        height: 120,
-                                        width: 400,
-                                        buttons: [{
-                                            text: '切换',
-                                            onclick: function (item, dialog) {
-                                                top.location='<%=request.getContextPath()%>/j_spring_security_switch_user?j_username=' + $('#switchUserAccount').val();
-                                                dialog.close();
-                                            }
-                                        }], isResize: true,
-                                        onLoaded: function () {
+<body class="fixed-sidebar full-height-layout gray-bg"
+      style="overflow: hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close">
+            <i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div>
+                        <span><img alt="image" class="img-circle" height="60" width="60"
+                                   src="${ctx}/images/kedacom_64X64.ico"/></span>
+                        <h3 class="" style="color: #ffffff">
+                            </i>总代管理系统
+                        </h3>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">主页</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a id="index001" class="J_menuItem" href="index_v1.html"
+                               data-index="0" th:href="@{/main}">了解BootDo
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa fa-bar-chart-o" ></i>
+                        <span class="nav-label" >基础信息</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li >
+                            <a class="J_menuItem" href="${ctx}/platform/console/hello.do">系统管理</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation"
+                 style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-default "
+                       href="#" title="收起菜单">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="hidden-xs">
+                        <a href="javascript:void(0)" target="_Blank" class="">
+                            你好,XXX
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left J_tabLeft">
+                <i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs J_menuTabs">
+                <div class="page-tabs-content">
+                    <a href="javascript:;" class="active J_menuTab"
+                       data-id="index_v1.html">首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right J_tabRight">
+                <i class="fa fa-forward"></i>
+            </button>
+            <div class="btn-group roll-nav roll-right">
+                <button class="dropdown J_tabClose" data-toggle="dropdown">
+                    关闭操作<span class="caret"></span>
+                </button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>定位当前选项卡</a></li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a>关闭全部选项卡</a></li>
+                    <li class="J_tabCloseOther"><a>关闭其他选项卡</a></li>
+                </ul>
+            </div>
+            <a href="/logout" class="roll-nav roll-right J_tabExit"><i
+                    class="fa fa fa-sign-out"></i> 退出</a>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
+                    src="" frameborder="0" data-id="index_v1.html"
+                    seamless></iframe>
+        </div>
+        <div class="footer">
+            <div class="pull-right">Footer</div>
+        </div>
+    </div>
+    <!--右侧部分结束-->
+</div>
+<!-- 全局js -->
+<script src="${ctx}/js/jquery-1.11.3.min.js"></script>
+<script src="${ctx}/js/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="${ctx}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${ctx}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${ctx}/js/plugins/layer/layer.min.js"></script>
+<!-- 自定义js -->
+<script src="${ctx}/js/app.js"></script>
+<script src="${ctx}/js/contabs.js"></script>
+<!-- 第三方插件 -->
+<script src="${ctx}/js/plugins/pace/pace.min.js"></script>
+<!-- Toastr script -->
+<script src="${ctx}/js/plugins/toastr/toastr.min.js"></script>
 
-                                        }
-                                    });
-                                }
-                            </script>
-                        </sec:authorize>
-                        <sec:authorize ifAllGranted="ROLE_PREVIOUS_ADMINISTRATOR">
-                            <li>
-                                <a class="settings" href="<%=request.getContextPath()%>/j_spring_security_exit_user" >退出切换</a>
-                            </li>
-                        </sec:authorize>
-						<li><a class="quit" href="${ctx}/logout">退出</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		
-		<!--主体-->
-		<div position="left" id="navigation" class="kd-property-nav"></div>
-		<div position="center">
-			<div id="kdPageLoading" class="kd-Loading">loading...</div>
-			<iframe id="kdUIFrameWindow" src="${ctx}/dailyReport/report/initMyWeekReport.do" frameborder="0" width="100%" height="100%"></iframe>
-		</div>
-		<!--<div position="right"></div>-->
-		
-		<!--底部-->
-		<!--<div position="bottom"></div>-->
-	</div>
+<script type="text/javascript">
+    $(function () {
+        addNav();
+    });
+
+    function addNav() {
+        $.ajax({
+            url: "${ctx}/platform/console/getSysRolResTreeData.do?id=${currentUser.userId}",
+            dataType: "json",
+            success: function (result) {
+                var items = result.items;
+                console.log(result);
+            }
+        });
+    }
+
+</script>
 </body>
+
 </html>

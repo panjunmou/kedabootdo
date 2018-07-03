@@ -9,11 +9,7 @@
     <meta name="description" content=""/>
     <title>总代管理系统首页</title>
     <%@include file="/commons/include/get.jsp" %>
-    <link href="${ctx}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="${ctx}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="${ctx}/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link href="${ctx}/css/animate.css" rel="stylesheet">
-    <link href="${ctx}/css/style.css?v=4.1.0" rel="stylesheet">
+
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg"
@@ -35,9 +31,8 @@
                         </h3>
                     </div>
                 </li>
-                <li>
+                <%--<li>
                     <a href="#">
-                        <i class="fa fa-home"></i>
                         <span class="nav-label">主页</span>
                         <span class="fa arrow"></span>
                     </a>
@@ -51,16 +46,25 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa fa-bar-chart-o" ></i>
-                        <span class="nav-label" >基础信息</span>
+                        <span class="nav-label">基础信息</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li >
-                            <a class="J_menuItem" href="${ctx}/platform/console/hello.do">系统管理</a>
+                        <li>
+                            <a href="#">
+                                <span class="nav-label">基础信息1</span>
+                                <span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a class="J_menuItem" href="index_v1.html"
+                                       data-index="0" th:href="@{/main}">了解BootDo
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
-                </li>
+                </li>--%>
             </ul>
         </div>
     </nav>
@@ -123,37 +127,10 @@
     </div>
     <!--右侧部分结束-->
 </div>
-<!-- 全局js -->
-<script src="${ctx}/js/jquery-1.11.3.min.js"></script>
-<script src="${ctx}/js/plugins/bootstrap/bootstrap.min.js"></script>
-<script src="${ctx}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="${ctx}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${ctx}/js/plugins/layer/layer.min.js"></script>
-<!-- 自定义js -->
-<script src="${ctx}/js/app.js"></script>
-<script src="${ctx}/js/contabs.js"></script>
-<!-- 第三方插件 -->
-<script src="${ctx}/js/plugins/pace/pace.min.js"></script>
-<!-- Toastr script -->
-<script src="${ctx}/js/plugins/toastr/toastr.min.js"></script>
 
-<script type="text/javascript">
-    $(function () {
-        addNav();
-    });
 
-    function addNav() {
-        $.ajax({
-            url: "${ctx}/platform/console/getSysRolResTreeData.do?id=${currentUser.userId}",
-            dataType: "json",
-            success: function (result) {
-                var items = result.items;
-                console.log(result);
-            }
-        });
-    }
 
-</script>
+
 </body>
 
 </html>

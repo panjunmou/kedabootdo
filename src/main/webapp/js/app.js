@@ -4,6 +4,60 @@
 
 
 $(document).ready(function () {
+    $.ajax({
+        url: __basePath + "/platform/console/getSysRolResTreeData.do?id=${currentUser.userId}",
+        dataType: "json",
+        async: false,
+        success: function (result) {
+            var items = result.items;
+            $.each(items, function (i, v) {
+                console.log(v);
+                var liNode = $('<li/>');
+                liNode.append(
+                    '    <a href="#">\n' +
+                    '        <span class="nav-label">' + v.text + '</span>\n' +
+                    '        <span class="fa arrow"></span>\n' +
+                    '    </a>\n'
+                );
+                var children = v.children;
+                if (children != undefined && children != null && children.length > 0) {
+                    var ulNode = $('<ul class="nav nav-second-level"></ul>');
+                    liNode.append(ulNode);
+                    regMenu(v, ulNode, 0);
+                }
+                $("#side-menu").append(liNode);
+            });
+        }
+    });
+
+    function regMenu(data, ulNode, index) {
+        var pChildren = data.children;
+        if (pChildren != undefined && pChildren != null && pChildren.length > 0) {
+            var padding = 35 + index * 10;
+            $.each(pChildren, function (l, m) {
+                var cLiNode = $('<li/>');
+                var children = m.children;
+                if (children != undefined && children != null && children.length > 0) {
+                    cLiNode.append(
+                        '<a href="#" style="padding-left: ' + padding + 'px"' +
+                        '    <span class="nav-label">' + m.text + '</span>\n' +
+                        '    <span class="fa arrow"></span>\n' +
+                        '</a>'
+                    );
+                    var cUlNode = $('<ul class="nav nav-second-level"></ul>');
+                    regMenu(m, cUlNode, index + 1);
+                    cLiNode.append(cUlNode);
+                } else {
+                    cLiNode.append(
+                        '<a class="J_menuItem" href="' + m.url + '"\n style="padding-left: ' + padding + 'px">' +
+                        m.text +
+                        '</a>\n'
+                    );
+                }
+                ulNode.append(cLiNode);
+            });
+        }
+    }
 
     // MetsiMenu
     $('#side-menu').metisMenu();
@@ -63,6 +117,7 @@ $(document).ready(function () {
         var heightWithoutNavbar = $("body > #wrapper").height() - 61;
         $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
     }
+
     fix_height();
 
     $(window).bind("load resize click scroll", function () {

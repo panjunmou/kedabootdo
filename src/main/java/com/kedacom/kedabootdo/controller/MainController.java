@@ -61,11 +61,6 @@ public class MainController {
         return new ModelAndView("console/main").addObject("currentUser", ContextUtil.getCurrentUser());
     }
 
-    @RequestMapping({"hello.do"})
-    public ModelAndView hello(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return new ModelAndView("console/hello");
-    }
-
     /**
      * @param request
      * @param response

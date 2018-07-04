@@ -8,7 +8,7 @@
 
     <meta charset="UTF-8">
 
-    <title>日报管理系统</title>
+    <title>总代管理系统</title>
 
     <style>
         @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
@@ -162,7 +162,7 @@
 <div class="body"></div>
 <div class="grad"></div>
 <div class="header">
-    <div>日报 <span>系统</span></div>
+    <div>总代 <span>系统</span></div>
 </div>
 <br>
 

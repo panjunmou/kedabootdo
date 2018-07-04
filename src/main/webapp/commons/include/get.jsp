@@ -14,26 +14,28 @@
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/css/main.css" rel="stylesheet" type="text/css"/>
 
-<link href="${ctx}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-<link href="${ctx}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="${ctx}/css/bootstrap.min.css" rel="stylesheet">
+<link href="${ctx}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+<link href="${ctx}/css/font-awesome.min.css" rel="stylesheet">
 <link href="${ctx}/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-<link href="${ctx}/css/animate.css" rel="stylesheet">
-<link href="${ctx}/css/style.css?v=4.1.0" rel="stylesheet">
+<link href="${ctx}/css/style.css" rel="stylesheet">
 
 <!-- 全局js -->
 <script src="${ctx}/js/jquery-1.11.3.min.js"></script>
 <script src="${ctx}/js/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="${ctx}/js/plugins/bootstrap/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="${ctx}/js/plugins/bootstrap/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="${ctx}/js/plugins/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="${ctx}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="${ctx}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="${ctx}/js/plugins/layer/layer.min.js"></script>
+<script src="${ctx}/js/plugins/layer/layer.js"></script>
 
 <!-- 自定义js -->
 <script src="${ctx}/js/app.js"></script>
 <script src="${ctx}/js/contabs.js"></script>
 <!-- 第三方插件 -->
-<script src="${ctx}/js/plugins/pace/pace.min.js"></script>
-<!-- Toastr script -->
 <script src="${ctx}/js/plugins/toastr/toastr.min.js"></script>
+<script src="${ctx}/js/plugins/jquery.serializeObject.js"></script>
 
 <script type="text/javascript">
     var __ctx = '${ctx}';

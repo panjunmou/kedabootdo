@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * 需求申请时,计算价格;
@@ -60,7 +61,8 @@ public class RentSysMaterialPriceController extends BaseController {
     @RequestMapping("/listData.do")
     @ResponseBody
     public Page<RentSysMaterialPriceVO> listData(Pageable pageable) throws Exception {
-        Page<RentSysMaterialPriceVO> page = rentSysMaterialPriceService.listByPage(RequestUtil.getParameterValueMap(request, false, false), pageable);
+        Map<String, Object> parameterValueMap = RequestUtil.getParameterValueMap(request, false, false);
+        Page<RentSysMaterialPriceVO> page = rentSysMaterialPriceService.listByPage(parameterValueMap, pageable);
         return page;
     }
 

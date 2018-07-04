@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kedacom.kmoa.rent.dao.mybatis.RentSysMaterialPriceMapper">
-    <resultMap id="RentSysMaterialPricePO" type="com.kedacom.kmoa.rent.model.mybatis.RentSysMaterialPricePO">
+<mapper namespace="com.kedacom.kedabootdo.dao.mybatis.RentSysMaterialPriceMapper">
+    <resultMap id="RentSysMaterialPricePO" type="com.kedacom.kedabootdo.model.mybatis.RentSysMaterialPricePO">
         <id property="id" column="id" jdbcType="NUMERIC"/>
         <result property="type" column="type" jdbcType="VARCHAR"/>
         <result property="priceType" column="price_type" jdbcType="VARCHAR"/>
@@ -32,7 +32,7 @@
         </where>
     </sql>
 
-    <insert id="add" parameterType="com.kedacom.kmoa.rent.model.mybatis.RentSysMaterialPricePO">
+    <insert id="add" parameterType="com.kedacom.kedabootdo.model.mybatis.RentSysMaterialPricePO">
         INSERT INTO rent_sys_material_price
         (<include refid="columns"/>)
         VALUES
@@ -46,7 +46,7 @@
 	</delete>
 
 
-    <update id="update" parameterType="com.kedacom.kmoa.rent.model.mybatis.RentSysMaterialPricePO">
+    <update id="update" parameterType="com.kedacom.kedabootdo.model.mybatis.RentSysMaterialPricePO">
 		UPDATE rent_sys_material_price   SET
 		type=#{type,jdbcType=VARCHAR},
 		price_type=#{priceType,jdbcType=VARCHAR},

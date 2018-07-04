@@ -39,7 +39,8 @@
     <mvc:annotation-driven conversion-service="conversionService">
         <mvc:argument-resolvers>
             <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" >
-                <property name="sizeParameterName" value="limit"/>
+                <property name="sizeParameterName" value="pageSize"/>
+                <property name="pageParameterName" value="pageNumber"/>
                 <property name="oneIndexedParameters" value="true" />
                 <constructor-arg ref="extjsSortHandlerMethodArgumentResolver"/>
             </bean>
@@ -58,21 +59,6 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <!--
-        <constructor-arg ref="extjsSortHandlerMethodArgumentResolver">
-        </constructor-arg>
-     -->
-    <bean id="extjsSortHandlerMethodArgumentResolver"
-          class="com.kedacom.web.page.extjs5.ExtjsSortHandlerMethodArgumentResolver"/>
-
-    <bean class="com.kedacom.web.common.AjaxExceptionHandler">
-        <property name="defaultErrorView" value="/platform/error/forbidden" />
-        <property name="exceptionMappings">
-            <props>
-                <prop key="java.lang.Exception">/platform/error/forbidden</prop>
-            </props>
-        </property>
-    </bean>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="redirectHttp10Compatible" value="false"/>
@@ -82,8 +68,10 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- JSR303 Validator定义 -->
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+    <bean class="org.springframework.data.web.config.SpringDataWebConfiguration"/>
+
+    <bean id="extjsSortHandlerMethodArgumentResolver"
+          class="com.kedacom.web.page.extjs5.ExtjsSortHandlerMethodArgumentResolver"/>
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -95,5 +83,17 @@
             <value>utf-8</value>
         </property>
     </bean>
-    <bean class="org.springframework.data.web.config.SpringDataWebConfiguration"/>
+
+    <bean class="com.kedacom.web.common.AjaxExceptionHandler">
+        <property name="defaultErrorView" value="/platform/error/forbidden" />
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">/platform/error/forbidden</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- JSR303 Validator定义 -->
+    <!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
 </beans>
+

@@ -11,19 +11,24 @@ $(document).ready(function () {
         success: function (result) {
             var items = result.items;
             $.each(items, function (i, v) {
-                console.log(v);
                 var liNode = $('<li/>');
-                liNode.append(
-                    '    <a href="#">\n' +
-                    '        <span class="nav-label">' + v.text + '</span>\n' +
-                    '        <span class="fa arrow"></span>\n' +
-                    '    </a>\n'
-                );
                 var children = v.children;
                 if (children != undefined && children != null && children.length > 0) {
+                    liNode.append(
+                        '    <a href="#">\n' +
+                        '        <span class="nav-label">' + v.text + '</span>\n' +
+                        '        <span class="fa arrow"></span>\n' +
+                        '    </a>\n'
+                    );
                     var ulNode = $('<ul class="nav nav-second-level"></ul>');
                     liNode.append(ulNode);
                     regMenu(v, ulNode, 0);
+                }else{
+                    liNode.append(
+                        '<a class="J_menuItem" href="' + v.url + '">' +
+                        v.text +
+                        '</a>\n'
+                    );
                 }
                 $("#side-menu").append(liNode);
             });

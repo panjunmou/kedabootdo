@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.kedacom:kedacom-security:2.4.3-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/kedacom-security/2.4.3-SNAPSHOT/kedacom-security-2.4.3-20180522.033719-4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/kedacom-security/2.4.3-SNAPSHOT/kedacom-security-2.4.3-20180522.033719-4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/kedacom/kedacom-security/2.4.3-SNAPSHOT/kedacom-security-2.4.3-20180522.033719-4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

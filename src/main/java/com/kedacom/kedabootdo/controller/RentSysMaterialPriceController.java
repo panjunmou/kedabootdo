@@ -1,7 +1,7 @@
 package com.kedacom.kedabootdo.controller;
 
-import com.kedacom.kmoa.rent.service.RentSysMaterialPriceService;
-import com.kedacom.kmoa.rent.vo.RentSysMaterialPriceVO;
+import com.kedacom.kedabootdo.service.RentSysMaterialPriceService;
+import com.kedacom.kedabootdo.vo.RentSysMaterialPriceVO;
 import com.kedacom.utils.ArrayUtil;
 import com.kedacom.utils.RequestUtil;
 import com.kedacom.web.ResultMessage;

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kedacom.kmoa.rent.dao.mybatis.RentSysMaterialPriceMapper">
+    <resultMap id="RentSysMaterialPricePO" type="com.kedacom.kmoa.rent.model.mybatis.RentSysMaterialPricePO">
+        <id property="id" column="id" jdbcType="NUMERIC"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="priceType" column="price_type" jdbcType="VARCHAR"/>
+        <result property="materialCode" column="material_code" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="NUMERIC"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="columns">
+		id ,type ,price_type ,material_code,price ,create_by ,create_time ,update_by ,update_time
+	</sql>
+
+    <sql id="dynamicWhere">
+        <where>
+            <if test="@Ognl@isNotEmpty(type)">AND type LIKE CONCAT('%',#{type},'%')</if>
+            <if test="@Ognl@isNotEmpty(priceType)">AND price_type LIKE CONCAT('%',#{priceType},'%')</if>
+            <if test="@Ognl@isNotEmpty(materialCode)">AND material_code LIKE CONCAT('%',#{materialCode},'%')</if>
+            <if test="@Ognl@isNotEmpty(price)">AND price = #{price}</if>
+            <if test="@Ognl@isNotEmpty(createBy)">AND create_by LIKE CONCAT('%',#{createBy},'%')</if>
+            <if test="@Ognl@isNotEmpty(begincreateTime)">AND create_time >=#{begincreateTime,jdbcType=DATE}</if>
+            <if test="@Ognl@isNotEmpty(endcreateTime)">AND create_time &lt;=#{endcreateTime,jdbcType=DATE}</if>
+            <if test="@Ognl@isNotEmpty(updateBy)">AND update_by LIKE CONCAT('%',#{updateBy},'%')</if>
+            <if test="@Ognl@isNotEmpty(beginupdateTime)">AND update_time >=#{beginupdateTime,jdbcType=DATE}</if>
+            <if test="@Ognl@isNotEmpty(endupdateTime)">AND update_time &lt;=#{endupdateTime,jdbcType=DATE}</if>
+        </where>
+    </sql>
+
+    <insert id="add" parameterType="com.kedacom.kmoa.rent.model.mybatis.RentSysMaterialPricePO">
+        INSERT INTO rent_sys_material_price
+        (<include refid="columns"/>)
+        VALUES
+        (#{id,jdbcType=NUMERIC},#{type,jdbcType=VARCHAR},#{priceType,jdbcType=VARCHAR},#{materialCode,jdbcType=VARCHAR},#{price,jdbcType=NUMERIC},#{createBy,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateBy,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <delete id="delById" parameterType="java.lang.Long">
+		DELETE FROM rent_sys_material_price 
+		WHERE
+		id=#{id}
+	</delete>
+
+
+    <update id="update" parameterType="com.kedacom.kmoa.rent.model.mybatis.RentSysMaterialPricePO">
+		UPDATE rent_sys_material_price   SET
+		type=#{type,jdbcType=VARCHAR},
+		price_type=#{priceType,jdbcType=VARCHAR},
+		material_code=#{materialCode,jdbcType=VARCHAR},
+		price=#{price,jdbcType=NUMERIC},
+		create_by=#{createBy,jdbcType=VARCHAR},
+		create_time=#{createTime,jdbcType=TIMESTAMP},
+		update_by=#{updateBy,jdbcType=VARCHAR},
+		update_time=#{updateTime,jdbcType=TIMESTAMP}
+		WHERE
+		id=#{id}
+	</update>
+
+    <select id="getById" parameterType="java.lang.Long" resultMap="RentSysMaterialPricePO" useCache="false">
+        select rsmp.*,rsmb.material_name as materialName,
+        case
+        when price_type = 'material'
+        then (
+        select ITEMNAME
+        from sys_dic
+        where TYPEID =
+        (
+        select sys_gl_type.TYPEID
+        from sys_gl_type
+        where NODEKEY = 'requirementType'
+        )
+        and ITEMVALUE = type
+        )
+        else
+        (
+        select ITEMNAME
+        from sys_dic
+        where TYPEID =
+        (
+        select sys_gl_type.TYPEID
+        from sys_gl_type
+        where NODEKEY = 'transportType'
+        )
+        and ITEMVALUE = type
+        )
+        end as typeName
+        from rent_sys_material_price rsmp
+        left join rent_sys_material_base rsmb on rsmb.material_code = rsmp.material_code
+        WHERE rsmp.id=#{id}
+    </select>
+
+    <select id="getAll" resultMap="RentSysMaterialPricePO" useCache="false">
+        select rsmp.*,rsmb.material_name as materialName,
+        case
+        when price_type = 'material'
+        then (
+        select ITEMNAME
+        from sys_dic
+        where TYPEID =
+        (
+        select sys_gl_type.TYPEID
+        from sys_gl_type
+        where NODEKEY = 'requirementType'
+        )
+        and ITEMVALUE = type
+        )
+        else
+        (
+        select ITEMNAME
+        from sys_dic
+        where TYPEID =
+        (
+        select sys_gl_type.TYPEID
+        from sys_gl_type
+        where NODEKEY = 'transportType'
+        )
+        and ITEMVALUE = type
+        )
+        end as typeName
+        from rent_sys_material_price rsmp
+        left join rent_sys_material_base rsmb on rsmb.material_code = rsmp.material_code
+        <where>
+            <if test="@Ognl@isNotEmpty(type)">AND rsmp.type LIKE CONCAT('%',#{type},'%')</if>
+            <if test="@Ognl@isNotEmpty(priceType)">AND rsmp.price_type LIKE CONCAT('%',#{priceType},'%')</if>
+            <if test="@Ognl@isNotEmpty(materialCode)">AND rsmp.material_code LIKE CONCAT('%',#{materialCode},'%')</if>
+            <if test="@Ognl@isNotEmpty(materialName)">AND rsmb.material_name LIKE CONCAT ('%/',#{materialName},'%') ESCAPE '/'</if>
+            <if test="@Ognl@isNotEmpty(price)">AND rsmp.price = #{price}</if>
+        </where>
+        <if test="@Ognl@isNotEmpty(orderField)">
+            order by ${orderField} ${orderSeq}
+        </if>
+        <if test="@Ognl@isEmpty(orderField)">
+            order by id desc
+        </if>
+    </select>
+
+    <select id="getTransportList" resultMap="RentSysMaterialPricePO" useCache="false">
+        select price.*, transType.itemname as type_name from
+        rent_sys_material_price price left join
+        (
+        select * from sys_dic where typeid = (select typeid from sys_gl_type where nodekey = 'transportType') ) transType
+        on price.type = transType.itemvalue
+        where 1=1
+        and price_type = 'transport'
+    </select>
+
+
+</mapper>

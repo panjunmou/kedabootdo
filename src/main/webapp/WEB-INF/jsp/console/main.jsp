@@ -1,4 +1,5 @@
-﻿<%@page pageEncoding="UTF-8" %>
+﻿<%@ page import="com.kedacom.security.util.ContextUtil" %>
+<%@page pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -83,7 +84,7 @@
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="hidden-xs">
                         <a href="javascript:void(0)" target="_Blank" class="">
-                            你好,XXX
+                            你好,<%=ContextUtil.getCurrentUser().getFullname()%>
                         </a>
                     </li>
                 </ul>

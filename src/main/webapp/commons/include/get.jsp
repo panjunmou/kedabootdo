@@ -11,9 +11,8 @@
 
 <link rel="icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon"/>
-<link href="${ctx}/css/common.css" rel="stylesheet" type="text/css"/>
-<link href="${ctx}/css/main.css" rel="stylesheet" type="text/css"/>
-
+<%--<link href="${ctx}/css/common.css" rel="stylesheet" type="text/css"/>--%>
+<%--<link href="${ctx}/css/main.css" rel="stylesheet" type="text/css"/>--%>
 <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ctx}/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 <link href="${ctx}/css/font-awesome.min.css" rel="stylesheet">

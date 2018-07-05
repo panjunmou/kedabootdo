@@ -1833,7 +1833,7 @@ table.dataTable thead .sorting:after {
     padding-left: 0;
 }
 
-.form-control, .single-line {
+/*.form-control, .single-line {
     background: #FFFFFF none;
     border: 1px solid #e5e6e7;
     border-radius: 1px;
@@ -1872,7 +1872,7 @@ table.dataTable thead .sorting:after {
 
 .has-error .control-label {
     color: #ed5565;
-}
+}*/
 
 .input-group-addon {
     background-color: #fff;
